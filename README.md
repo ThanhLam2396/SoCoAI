@@ -1,8 +1,17 @@
-SoCoAI – Your AI Ally for Blockchain and Community Support
-
+<h1 align="center">
+  <br>
+  <a href="https://socoai.xyz"><img src="https://github.com/ThanhLam2396/SoCoAI/blob/main/assets/favicon-socoai.png?raw=true" alt="SoCoAI" width="200"></a>
+  <br>
+  SoCoAI
+  <br>
+</h1>
+<h4 align="center">A Powerful Suite of Tools Driven by AI.</h4>
+<p align="center">
 SoCoAI (Social + Community + AI) is more than just an AI Agent—it’s an intelligent automation solution designed to empower developers, communities, and businesses within blockchain ecosystems like Injective. By streamlining repetitive tasks such as news aggregation, market analysis, social media engagement, and community support, SoCoAI delivers a powerful, user-friendly, and adaptable tool. Whether it’s delivering real-time updates, tracking DApp trends, or assisting users via multi-platform chatbots, SoCoAI saves time, optimizes resources, and lets you focus on what truly matters—building and thriving in the fast-paced world of blockchain.
+</p>
 
-### 1. Key Features:
+
+## 🚀 Features:
 -   News Aggregation and Analysis: Collects news from X, filters valuable insights, generates concise recaps, and posts to X, Telegram, Discord, or saves to Google Sheets.
 -   Market and On-Chain Analysis: Uses data from CoinGecko and Injective gRPC to assess trends and DApp performance.
 -   Social Media Interaction: Auto-replies to comments and connects with KOLs to boost visibility.
@@ -11,7 +20,7 @@ SoCoAI (Social + Community + AI) is more than just an AI Agent—it’s an intel
 -   CMS Customization: Easily adjusts chatbot settings without technical expertise.
     
 
-### 2. Who Benefits?
+##  🍀 Who Benefits?
 -   Community Teams & News Trackers: SoCoAI helps them quickly gather and share ecosystem updates, even in local languages like Japanese or Spanish. It cuts workload with auto social chats and bots, freeing them for bigger tasks.
     
 -   Builders & DApps: Developers use it to auto-answer user questions and explain their DApps, no manual work needed.
@@ -23,10 +32,10 @@ SoCoAI (Social + Community + AI) is more than just an AI Agent—it’s an intel
 -   Non-Blockchain Businesses: Companies use its chat and social features to support customers and save costs.
     
 
-### 3. How It Works?
+## 📡 How It Works?
 
 To see how SoCoAI manages tasks such as news summaries, market and on-chain analysis, and chatbot support, below is an illustration along with a detailed explanation of how it works:
-![enter image description here](https://raw.githubusercontent.com/ThanhLam2396/images/4b14ceb4ada161c1ff224dcaaecc000ca26b8007/socoai-transparent.svg)
+![enter image description here](https://raw.githubusercontent.com/ThanhLam2396/images/4b14ceb4ada161c1ff224dcaaecc000ca26b8007/socoai-notransparent-light.svg)
 **Explanation:**
 **1. Data Collection**
 The process starts by gathering data from multiple sources:
@@ -61,7 +70,7 @@ This is the core stage where SoCoAI turns transformed data into useful insights 
         These outputs are shared on X, Telegram, and Discord for easy community access and stored in Google Sheets or databases for reporting and analysis later.
     
 
-**Links**
+**🔗 Links**
 -   X: https://x.com/SoCoAI – Follow automated blockchain and dApp news updates from social media posts.
     
 -   Telegram: [https://t.me/injective_ecosystem_news](https://t.me/injective_ecosystem_news) – Get instant news, market analysis, and chat with the SoCoAI chatbot about ecosystems.
@@ -77,7 +86,7 @@ This is the core stage where SoCoAI turns transformed data into useful insights 
 
 ----------
 
-### 4. Quick Installation Guide
+## ⚡️ Quick Installation Guide
 
 SoCoAI is engineered for seamless deployment via Docker Compose, enabling you to launch the full system in just a few steps. Follow this guide to install and run SoCoAI locally or on a server.
 
@@ -162,11 +171,10 @@ SoCoAI is engineered for seamless deployment via Docker Compose, enabling you to
 		    ```
      ![enter image description here](https://github.com/ThanhLam2396/images/blob/main/docker-compose-down.gif?raw=true)
 
-### 4. Notes
+## 📒 Notes
 
 -   Ensure config/setting.json is correctly configured before starting.
     
 -   Data is stored in ./storage; adjust volumes as needed.
     
--   Visit [https://docs.socoai.xyz/](https://docs.socoai.xyz/) for additional guidance.# socoai
-# SoCoAI
+-   Visit [https://docs.socoai.xyz/](https://docs.socoai.xyz/) for additional guidance.
