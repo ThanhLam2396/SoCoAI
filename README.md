@@ -168,6 +168,9 @@ SoCoAI is engineered for seamless deployment via Docker Compose, enabling you to
 		    ```
      ![enter image description here](https://github.com/ThanhLam2396/images/blob/main/docker-compose-down.gif?raw=true)
 
+## 🏡 Usage
+
+Want to know how to use SoCoAI? Check out this demo video: [SoCoAI Demo](https://youtu.be/cDrCwT8vSLM). It walks you through everything you need to get started!
 ## 📒 Notes
 
 -   Ensure config/setting.json is correctly configured before starting.
