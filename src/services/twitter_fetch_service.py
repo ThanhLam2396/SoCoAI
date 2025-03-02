@@ -15,6 +15,7 @@ DAILY_TWEETS_FILE = "data/daily_tweets.json"
 
 # List of sensitive words (can be customized)
 SENSITIVE_WORDS = {"fuck", "bitch"}  # Add more sensitive words as needed
+MIN_TWEET_LENGTH = 50  # Minimum length for a tweet to be considered valuable
 
 class UserCacheService:
     @staticmethod
@@ -72,6 +73,7 @@ class TwitterFetchService:
         self.batch_size = 10  # Number of users per batch
         self.redis_client = redis.Redis(host='redis', port=6379, db=0)
         self.sensitive_words = SENSITIVE_WORDS  # Sensitive words filter
+        self.min_tweet_length = MIN_TWEET_LENGTH  # Minimum tweet length filter
         try:
             if self.redis_client.ping():
                 logger.info("[✅] Successfully connected to Redis")
@@ -80,18 +82,38 @@ class TwitterFetchService:
         except redis.ConnectionError as e:
             logger.error(f"[❌] Redis connection error: {e}")
 
-    def filter_sensitive_tweets(self, tweets):
-        """Filter out tweets containing sensitive words."""
+    def filter_tweets(self, tweets):
+        """Filter out tweets that are replies, retweets, quotes, contain sensitive words, or are shorter than min length."""
         filtered_tweets = []
-        skipped_count = 0
+        skipped_sensitive = 0
+        skipped_short = 0
+        skipped_referenced = 0
+        
         for tweet in tweets:
             tweet_text = tweet['text'].lower()  # Convert to lowercase for checking
+            tweet_length = len(tweet['text'])  # Get tweet length
+
+            # Check if tweet is a reply, retweet, or quote
+            if 'referenced_tweets' in tweet and tweet['referenced_tweets']:
+                logger.debug(f"[DEBUG] Skipped tweet due to being a reply/retweet/quote: {tweet['text']}")
+                skipped_referenced += 1
+                continue
+
+            # Check for sensitive words
             if any(word in tweet_text for word in self.sensitive_words):
                 logger.debug(f"[DEBUG] Skipped tweet due to sensitive content: {tweet['text']}")
-                skipped_count += 1
-            else:
-                filtered_tweets.append(tweet)
-        logger.info(f"[INFO] Filtered out {skipped_count} tweets with sensitive words.")
+                skipped_sensitive += 1
+                continue
+
+            # Check for minimum length
+            if tweet_length < self.min_tweet_length:
+                logger.debug(f"[DEBUG] Skipped tweet due to length < {self.min_tweet_length}: {tweet['text']} ({tweet_length} chars)")
+                skipped_short += 1
+                continue
+
+            filtered_tweets.append(tweet)
+
+        logger.info(f"[INFO] Filtered out {skipped_referenced} replies/retweets/quotes, {skipped_sensitive} tweets with sensitive words, and {skipped_short} tweets shorter than {self.min_tweet_length} characters.")
         return filtered_tweets
 
     def fetch_tweets_for_batch(self, user_ids):
@@ -101,7 +123,7 @@ class TwitterFetchService:
         params = {
             "query": query,
             "max_results": 50,  # Maximum number of tweets per batch
-            "tweet.fields": "created_at,text,author_id",
+            "tweet.fields": "created_at,text,author_id,referenced_tweets",  # Added referenced_tweets
             "start_time": start_time
         }
         headers = {"Authorization": f"Bearer {self.bearer_token}"}
@@ -130,12 +152,13 @@ class TwitterFetchService:
                     'id': tweet['id'],
                     'date': tweet_date.strftime("%Y-%m-%d %H:%M:%S"),
                     'text': tweet['text'],
-                    'author_id': tweet['author_id']
+                    'author_id': tweet['author_id'],
+                    'referenced_tweets': tweet.get('referenced_tweets', [])  # Include referenced_tweets
                 }
                 new_tweets.append(tweet_data)
 
-            # Filter sensitive words before returning
-            filtered_tweets = self.filter_sensitive_tweets(new_tweets)
+            # Filter tweets based on referenced status, sensitive words, and length
+            filtered_tweets = self.filter_tweets(new_tweets)
             logger.info(f"[INFO] Fetched and filtered {len(filtered_tweets)} original tweets for batch {user_ids}")
             return filtered_tweets
         except Exception as e:

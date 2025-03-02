@@ -3117,19 +3117,10 @@
         }
 		async function loadSocialNews() {
 			try {
-				const response = await fetch('data/daily_news_summary.txt');
+				const response = await fetch('data/weekly_news_summary.txt');
 				const text = await response.text();
 
-				const blocks = text.split(/\n\n+/);
-				let dateBlock = "";
-				let newsBlocks = [];
-
-				if (blocks[0].startsWith("DATE:")) {
-					dateBlock = blocks[0];
-					newsBlocks = blocks.slice(1).filter(b => b.trim() !== "");
-				} else {
-					newsBlocks = blocks.filter(b => b.trim() !== "");
-				}
+				const newsBlocks = text.split(/\n\n+/).filter(b => b.trim() !== "");
 
 				const reversedNewsBlocks = newsBlocks.reverse();
 
@@ -3139,10 +3130,7 @@
 						.replace(/(https?:\/\/[^\s]+)/g, `<a href="$1" target="_blank" class="social-link">$1</a>`); 
 				});
 
-				let finalContent = dateBlock;
-				if (formattedNews.length > 0) {
-					finalContent += '<br><br>' + formattedNews.join('<br><br><br>'); 
-				}
+				let finalContent = formattedNews.join('<br><br><br>');
 
 				finalContent = finalContent
 					.replace(/\n/g, '<br>')
