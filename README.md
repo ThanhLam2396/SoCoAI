@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://socoai.xyz"><img src="https://github.com/ThanhLam2396/SoCoAI/blob/main/assets/favicon-socoai.png?raw=true" alt="SoCoAI" width="200"></a>
+  <a href="https://socoai.xyz"><img src="https://github.com/ThanhLam2396/SoCoAI/blob/main/assets/favicon-socoai.png?raw=true" alt="SoCoAI" width="150"></a>
   <br>
   SoCoAI
   <br>
@@ -36,7 +36,7 @@ SoCoAI (Social + Community + AI) is more than just an AI Agent—it’s an intel
 
 To see how SoCoAI manages tasks such as news summaries, market and on-chain analysis, and chatbot support, below is an illustration along with a detailed explanation of how it works:
 ![enter image description here](https://raw.githubusercontent.com/ThanhLam2396/images/4b14ceb4ada161c1ff224dcaaecc000ca26b8007/socoai-notransparent-light.svg)
-**Explanation:**
+#### Explanation:
 **1. Data Collection**
 The process starts by gathering data from multiple sources:
    - Social Media: Mainly from X (Twitter), which provides news, posts, and comments from crypto projects, dApps, and blockchain communities.
