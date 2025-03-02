@@ -1,0 +1,145 @@
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./storage:/data
+    command: ["redis-server", "--appendonly", "yes"]
+
+  fetch_user:
+    build: .
+    container_name: fetch_user
+    restart: unless-stopped
+    depends_on:
+      - redis
+    environment:
+      - PYTHONPATH=/app/src
+    volumes:
+      - ./config:/app/config
+      - ./storage:/app/data
+    command: ["sh", "-c", "sleep 3 && python3 scripts/start_fetch_user.py"]
+
+  telegram_bot:
+    build: .
+    container_name: telegram_bot
+    restart: unless-stopped
+    environment:
+      - PYTHONPATH=/app/src
+    volumes:
+      - ./config:/app/config
+    command: ["python3", "scripts/start_telegram_bot.py"]
+
+  discord_bot:
+    build: .
+    container_name: discord_bot
+    restart: unless-stopped
+    environment:
+      - PYTHONPATH=/app/src
+    volumes:
+      - ./config:/app/config
+    command: ["sh", "-c", "sleep 3 && python3 scripts/start_discord_bot.py"]
+
+  twitter_reply:
+    build: .
+    container_name: twitter_reply
+    restart: unless-stopped
+    depends_on:
+      - redis
+    environment:
+      - PYTHONPATH=/app/src
+    volumes:
+      - ./config:/app/config
+    command: ["sh", "-c", "sleep 3 && python3 scripts/start_twitter_reply.py"]
+
+  auto_comment:
+    build: .
+    container_name: auto_comment
+    restart: unless-stopped
+    depends_on:
+      - redis
+    environment:
+      - PYTHONPATH=/app/src
+    volumes:
+      - ./config:/app/config
+    command: ["sh", "-c", "sleep 3 && python3 scripts/start_auto_comment.py"]
+
+  update_news:
+    build: .
+    container_name: update_news
+    restart: unless-stopped
+    depends_on:
+      - fetch_user
+    volumes:
+      - ./config:/app/config
+      - ./storage:/app/data
+    environment:
+      - PYTHONPATH=/app/src
+    command: ["sh", "-c", "sleep 3 && python3 scripts/start_update_news.py"]
+
+  daily_recap:
+    build: .
+    container_name: daily_recap
+    restart: unless-stopped
+    volumes:
+      - ./config:/app/config
+      - ./storage:/app/data
+    environment:
+      - PYTHONPATH=/app/src
+    command: ["sh", "-c", "sleep 3 && python3 scripts/start_daily_recap.py"]
+
+  market_news:
+    build: .
+    container_name: market_news
+    restart: unless-stopped
+    volumes:
+      - ./config:/app/config
+      - ./storage:/app/data
+    environment:
+      - PYTHONPATH=/app/src
+    command: ["sh", "-c", "sleep 3 && python3 scripts/start_market_news.py"]
+
+  onchain_news:
+    build: .
+    container_name: onchain_news
+    restart: unless-stopped
+    volumes:
+      - ./config:/app/config
+      - ./storage:/app/data
+    environment:
+      - PYTHONPATH=/app/src
+    command: ["sh", "-c", "sleep 3 && python3 scripts/start_onchain_news.py"]
+
+  dapps_tracker:
+    build: .
+    container_name: dapps_tracker
+    restart: unless-stopped
+    environment:
+      - PYTHONPATH=/app/src
+    volumes:
+      - ./config:/app/config
+      - ./storage:/app/data
+    command: ["sh", "-c", "sleep 3 && python3 scripts/start_tracker_dapps.py"]
+
+  web_app:
+    build: .
+    container_name: web_app
+    restart: unless-stopped
+    environment:
+      - FLASK_ENV=production
+      - PYTHONPATH=/app/src
+    env_file:
+      - .env
+    volumes:
+      - ./config:/app/config
+      - ./storage:/app/data
+    ports:
+      - "5555:5555"
+    command: ["sh", "-c", "sleep 3 && python3 scripts/start_web_app.py"]
+
+volumes:
+  redis_data:
+  config:
+  data:

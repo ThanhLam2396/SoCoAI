@@ -1,0 +1,84 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+dist/
+downloads/
+eggs/
+*.egg-info/
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Environment variables / Secrets
+.env
+*.env
+config.env
+secrets/
+*.key
+*.pem
+*.crt
+*.cert
+
+# Dependency directories
+pip-log.txt
+pip-delete-this-directory.txt
+site-packages/
+
+# Editor / IDE files
+.idea/
+*.sublime-workspace
+*.sublime-project
+.vscode/
+*.swp
+*~
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Testing / Coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Project-specific files 
+data/
+storage/
+config/settings.json
+config/service-account.json
+.env
+# Docker-related
+docker-compose.override.yml
+*.dockerignore

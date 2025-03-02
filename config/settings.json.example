@@ -1,0 +1,23 @@
+{
+    "BEARER_TOKEN": "xxxxxxx",                         
+    "OPENAI_API_KEY": "sk-proj-xxxxx",                 
+    "X_CONSUMER_KEY": "xxxxxxxxxxxxxxxxxxxx",           
+    "X_CONSUMER_SECRET": "xxxxxxxxxxxxxxxxxxxxxxx",    
+    "X_ACCESS_TOKEN": "xxxxxxxxxxxxxxxxxx",             
+    "X_ACCESS_TOKEN_SECRET": "xxxxxxxxxxxxxxxxxxxxxxxx",
+    "TELEGRAM_BOT_TOKEN": "xxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "TELEGRAM_CHAT_ID": "@xxxxxxxxxxxxxxx",             
+    "DISCORD_BOT_TOKEN": "xxxxxxxxxxxxxxxx",            
+    "DISCORD_CHANNEL_ID": "xxxxxxxxxxxxxxxxxxxxxxxxxx", 
+    "GOOGLE_SHEET_CREDENTIALS": "config/service-account.json", 
+    "SPREADSHEET_ID": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",     
+    "COINGECKO_API_KEY": "CG-xxxxxxxxxxxxxxxxxxxx",     
+    "LIST_IDS": ["1759xxxxxxxxx", "189466xxxxxx"],     
+    "LIST_USERS": ["user"],                           
+    "TWEETS_FETCH_INTERVAL": 3600,                      
+    "USERS_FETCH_INTERVAL": 3600,                         
+    "TWITTER_REPLY_INTERVAL": 300,                     
+    "AUTO_COMMENT_INTERVAL": 300,                      
+    "TOKEN_ID": "injective-protocol",                  
+    "TOKEN_ACCESS": "your-token"                        
+}
