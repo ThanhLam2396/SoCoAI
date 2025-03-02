@@ -1,9 +1,7 @@
 <h1 align="center">
   <br>
   <a href="https://socoai.xyz"><img src="https://github.com/ThanhLam2396/SoCoAI/blob/main/assets/favicon-socoai.png?raw=true" alt="SoCoAI" width="150"></a>
-  <br>
-  SoCoAI
-  <br>
+<span style="color: #53d6e2"><br>SoCoAI<br></span>
 </h1>
 <h4 align="center">A Powerful Suite of Tools Driven by AI.</h4>
 <p align="center">
@@ -105,7 +103,7 @@ SoCoAI is engineered for seamless deployment via Docker Compose, enabling you to
 
 1.  Clone the Repository    
     ```bash
-    git clone https://github.com/ThanhLam2396/socoai.git
+    git clone https://github.com/ThanhLam2396/SoCoAI.git
     cd socoai
     ```
     
