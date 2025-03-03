@@ -4,7 +4,7 @@ import time
 import logging
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from src.features.twitter_fetch_feature import TwitterFetchFeature  # Added to fetch tweets
+from src.features.twitter_fetch_feature import TwitterFetchFeature
 from src.services.twitter_transform_service import TwitterTransformService
 from src.services.news_generation_service import NewsGenerationService
 from src.services.post_to_x_service import PostToXService
@@ -16,8 +16,6 @@ from src.utils.config_loader import CONFIG
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 class UpdateNewsService:
-    """Update the latest news from API and post to various platforms"""
-
     def __init__(self):
         self.twitter_fetch_feature = TwitterFetchFeature()
         self.twitter_transform_service = TwitterTransformService()
@@ -27,14 +25,13 @@ class UpdateNewsService:
         self.post_to_discord_service = PostToDiscordService()
         self.post_to_sheets_service = PostToGoogleSheetsService()
         self.fetch_interval = CONFIG.get("TWEETS_FETCH_INTERVAL", 3600)
-        self.generated_news_file = "data/generated_news.txt"  # Define file path
+        self.generated_news_file = "data/generated_news.txt"
 
     def load_generated_news(self):
         """Load content from generated_news.txt and check if it's empty."""
         if not os.path.exists(self.generated_news_file):
             logging.warning(f"[⚠️] File {self.generated_news_file} not found!")
             return ""
-
         with open(self.generated_news_file, "r", encoding="utf-8") as f:
             content = f.read().strip()
             if not content:
@@ -46,7 +43,7 @@ class UpdateNewsService:
         while True:
             try:
                 logging.info("🔄 Fetching latest tweets...")
-                self.twitter_fetch_feature.run()  # Call fetch tweets before transform
+                self.twitter_fetch_feature.run()
                 logging.info("✅ Tweets fetched.")
 
                 logging.info("🔄 Transforming tweets...")
